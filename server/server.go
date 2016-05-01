@@ -52,6 +52,7 @@ func (p *proxy) ServeHTTP(rw http.ResponseWriter, req *http.Request) {
 func httpsServer(backends map[string]*url.URL, hosts map[string]string, isDev bool, wileClient *wile.Client) {
 	handler := newProxy(backends, hosts)
 	server := &http.Server{
+		Addr:    ":443",
 		Handler: securify(isDev, handler),
 		TLSConfig: &tls.Config{
 			GetCertificate: wileClient.GetCertificate,
@@ -72,7 +73,7 @@ func httpServer(isDev bool) {
 		http.Redirect(rw, req, u.String(), http.StatusMovedPermanently)
 	})
 
-	glog.Fatal(http.ListenAndServe(":http", securify(isDev, handler)))
+	glog.Fatal(http.ListenAndServe(":80", securify(isDev, handler)))
 }
 
 func securify(isDev bool, handler http.Handler) http.Handler {
