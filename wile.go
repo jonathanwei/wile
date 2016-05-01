@@ -17,9 +17,10 @@ import (
 	"sync/atomic"
 	"time"
 
+	"github.com/coreos/etcd/clientv3"
 	"github.com/golang/glog"
+	"github.com/pkg/errors"
 	"github.com/xenolf/lego/acme"
-	"github.com/xenolf/lego/providers/dns/googlecloud"
 )
 
 type Config struct {
@@ -34,6 +35,8 @@ type Config struct {
 
 	// Initial list of domains to obtain certs for.
 	InitialDomains []string
+
+	EtcdEndpoints []string
 }
 
 func NewClient(cfg *Config) (*Client, error) {
@@ -50,6 +53,7 @@ func NewClient(cfg *Config) (*Client, error) {
 type Client struct {
 	cfg    *Config
 	client *acme.Client
+	etcd   *clientv3.Client
 
 	certMu   sync.Mutex   // used by writers of certs.
 	certs    atomic.Value // stores a certMap
@@ -186,10 +190,14 @@ func (c *Client) acceptNewCertResource(domain string, certResource acme.Certific
 }
 
 func (c *Client) init() error {
-	dnsProvider, err := googlecloud.NewDNSProvider()
+	etcd, err := clientv3.New(clientv3.Config{
+		Endpoints:   c.cfg.EtcdEndpoints,
+		DialTimeout: 5 * time.Second,
+	})
 	if err != nil {
-		return err
+		return errors.Wrap(err, "failed to init etcd")
 	}
+	c.etcd = etcd
 
 	d, err := c.readData()
 	if err != nil {
@@ -219,8 +227,8 @@ func (c *Client) init() error {
 
 	go c.dataWriter()
 
-	c.client.ExcludeChallenges([]acme.Challenge{acme.HTTP01, acme.TLSSNI01})
-	c.client.SetChallengeProvider(acme.DNS01, dnsProvider)
+	c.client.ExcludeChallenges([]acme.Challenge{acme.DNS01, acme.TLSSNI01})
+	c.client.SetChallengeProvider(acme.HTTP01, etcdProvider{c})
 
 	// Setup initial certificates.
 	initialCerts := make(certMap)
