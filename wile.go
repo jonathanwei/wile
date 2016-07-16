@@ -153,6 +153,11 @@ func (c *Client) renewCert(domain string) {
 		panic("consistency error")
 	}
 
+	// jcr explicitly drops these fields from its JSON representation so we copy
+	// them from our representation.
+	jcr.CertResource.Certificate = jcr.Certificate
+	jcr.CertResource.PrivateKey = jcr.PrivateKey
+
 	certResource, err := c.client.RenewCertificate(jcr.CertResource, true)
 	if err != nil {
 		glog.Errorf("Got error renewing cert: %v", err)
