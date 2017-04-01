@@ -129,7 +129,7 @@ func (c *Client) createCert(domain string) {
 		return
 	}
 
-	certResource, errs := c.client.ObtainCertificate([]string{domain}, true, key)
+	certResource, errs := c.client.ObtainCertificate([]string{domain}, true, key, false)
 	// TODO: handle TOSError.
 	if len(errs) > 0 {
 		glog.Errorf("Got error when trying to obtain certificates: %v", errs)
@@ -149,7 +149,7 @@ func (c *Client) renewCert(domain string) {
 		panic("consistency error")
 	}
 
-	certResource, err := c.client.RenewCertificate(jcr.CertResource, true)
+	certResource, err := c.client.RenewCertificate(jcr.CertResource, true, false)
 	if err != nil {
 		glog.Errorf("Got error renewing cert: %v", err)
 		return

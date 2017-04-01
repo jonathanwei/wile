@@ -1,10 +1,19 @@
 {
-    "memo": "29ed37b352c02b8bacc055786609a823f9f1cf61ccc8a65a8e3ff42b41ce9243",
+    "memo": "3c6dba29b3520fb224bdf74cf95e9b99e790997b41b8445478d05d4342a0e1e0",
     "projects": [
+        {
+            "name": "cloud.google.com/go",
+            "version": "v0.7.0",
+            "revision": "2e6a95edb1071d750f6d7db777bf66cd2997af6c",
+            "packages": [
+                "compute/metadata",
+                "internal"
+            ]
+        },
         {
             "name": "github.com/golang/glog",
             "branch": "master",
-            "revision": "fca8c8854093a154ff1eb580aae10276ad6b1b5f",
+            "revision": "23def4e6c14b4da8ac2ed8007337bc5eb5007998",
             "packages": [
                 "."
             ]
@@ -18,17 +27,25 @@
             ]
         },
         {
+            "name": "github.com/googleapis/gax-go",
+            "branch": "master",
+            "revision": "9af46dd5a1713e8b5cd71106287eba3cefdde50b",
+            "packages": [
+                "."
+            ]
+        },
+        {
             "name": "github.com/miekg/dns",
             "branch": "master",
-            "revision": "89d9c5e74bc17cc9edb5d44d4f2f93a7ac77e365",
+            "revision": "dcffd061aaeef4f0ab8369d0443146462b64ea6d",
             "packages": [
                 "."
             ]
         },
         {
             "name": "github.com/unrolled/secure",
-            "branch": "v1",
-            "revision": "4b41e52ab568cbfd31eda3612d98192da1575c77",
+            "branch": "master",
+            "revision": "824e85271811af89640ea25620c67f6c2eed987e",
             "packages": [
                 "."
             ]
@@ -36,7 +53,7 @@
         {
             "name": "github.com/xenolf/lego",
             "branch": "master",
-            "revision": "094e3d41bb0422746c31a8b0b2a2daeeb87408a7",
+            "revision": "a111d61d85454f5d58a0f843ced3413b5678f244",
             "packages": [
                 "acme",
                 "providers/dns/googlecloud"
@@ -45,7 +62,7 @@
         {
             "name": "golang.org/x/crypto",
             "branch": "master",
-            "revision": "1777f3ba8c1fed80fcaec3317e3aaa4f627764d2",
+            "revision": "3cb07270c9455e8ad27956a70891c962d121a228",
             "packages": [
                 "ocsp"
             ]
@@ -53,18 +70,23 @@
         {
             "name": "golang.org/x/net",
             "branch": "master",
-            "revision": "2e9cee70ee697e0a2ef894b560dda50dec7dff58",
+            "revision": "ffcf1bedda3b04ebb15a168a59800a73d6dc0f4d",
             "packages": [
                 "context",
                 "context/ctxhttp",
+                "http2",
+                "http2/hpack",
                 "idna",
-                "publicsuffix"
+                "internal/timeseries",
+                "lex/httplex",
+                "publicsuffix",
+                "trace"
             ]
         },
         {
             "name": "golang.org/x/oauth2",
             "branch": "master",
-            "revision": "8a57ed94ffd43444c0879fe75701732a38afc985",
+            "revision": "7fdf09982454086d5570c7db3e11f360194830ca",
             "packages": [
                 ".",
                 "google",
@@ -74,9 +96,25 @@
             ]
         },
         {
+            "name": "golang.org/x/text",
+            "branch": "master",
+            "revision": "f4b4367115ec2de254587813edaa901bc1c723a8",
+            "packages": [
+                "internal/gen",
+                "internal/triegen",
+                "internal/ucd",
+                "secure/bidirule",
+                "transform",
+                "unicode/bidi",
+                "unicode/cldr",
+                "unicode/norm",
+                "unicode/rangetable"
+            ]
+        },
+        {
             "name": "google.golang.org/api",
             "branch": "master",
-            "revision": "0caa37974a5f5ae67172acf68b4970f7864f994c",
+            "revision": "48e49d1645e228d1c50c3d54fb476b2224477303",
             "packages": [
                 "dns/v1",
                 "gensupport",
@@ -102,18 +140,28 @@
             ]
         },
         {
-            "name": "google.golang.org/cloud",
-            "branch": "master",
-            "revision": "777d8f0a56610b58d4254b0db6c59d9afd58b5c6",
+            "name": "google.golang.org/grpc",
+            "version": "v1.2.0",
+            "revision": "cdee119ee21e61eef7093a41ba148fa83585e143",
             "packages": [
-                "compute/metadata",
-                "internal"
+                ".",
+                "codes",
+                "credentials",
+                "grpclog",
+                "internal",
+                "keepalive",
+                "metadata",
+                "naming",
+                "peer",
+                "stats",
+                "tap",
+                "transport"
             ]
         },
         {
             "name": "gopkg.in/square/go-jose.v1",
-            "branch": "master",
-            "revision": "40d457b439244b546f023d056628e5184136899b",
+            "version": "v1.1.0",
+            "revision": "aa2e30fdd1fe9dd3394119af66451ae790d50e0d",
             "packages": [
                 ".",
                 "cipher",
