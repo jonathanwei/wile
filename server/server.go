@@ -17,7 +17,7 @@ func run(backends map[string]*url.URL, hosts map[string]string, isDev bool, wile
 		glog.Fatalf("Got error creating wile client: %v", err)
 	}
 
-	go httpServer(isDev)
+	go httpServer(isDev, wileClient)
 	httpsServer(backends, hosts, isDev, wileClient)
 }
 
@@ -52,6 +52,7 @@ func (p *proxy) ServeHTTP(rw http.ResponseWriter, req *http.Request) {
 func httpsServer(backends map[string]*url.URL, hosts map[string]string, isDev bool, wileClient *wile.Client) {
 	handler := newProxy(backends, hosts)
 	server := &http.Server{
+		Addr:    ":443",
 		Handler: securify(isDev, handler),
 		TLSConfig: &tls.Config{
 			GetCertificate: wileClient.GetCertificate,
@@ -61,8 +62,8 @@ func httpsServer(backends map[string]*url.URL, hosts map[string]string, isDev bo
 	glog.Fatal(server.ListenAndServeTLS("", ""))
 }
 
-func httpServer(isDev bool) {
-	handler := http.HandlerFunc(func(rw http.ResponseWriter, req *http.Request) {
+func httpServer(isDev bool, wileClient *wile.Client) {
+	redirectHandler := http.HandlerFunc(func(rw http.ResponseWriter, req *http.Request) {
 		u := &url.URL{
 			Scheme:   "https",
 			Host:     req.Host,
@@ -72,7 +73,11 @@ func httpServer(isDev bool) {
 		http.Redirect(rw, req, u.String(), http.StatusMovedPermanently)
 	})
 
-	glog.Fatal(http.ListenAndServe(":http", securify(isDev, handler)))
+	mux := http.NewServeMux()
+	mux.Handle("/.well-known/acme-challenge/", wileClient)
+	mux.Handle("/", securify(isDev, redirectHandler))
+
+	glog.Fatal(http.ListenAndServe(":80", mux))
 }
 
 func securify(isDev bool, handler http.Handler) http.Handler {

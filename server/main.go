@@ -36,6 +36,7 @@ func main() {
 		Email:          *acmeEmail,
 		Path:           os.ExpandEnv(*certPath),
 		InitialDomains: domains,
+		EtcdEndpoints:  []string{"localhost:2378"},
 	}
 
 	run(backends, hosts, *development, wileCfg)

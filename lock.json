@@ -1,13 +1,33 @@
 {
-    "memo": "3c6dba29b3520fb224bdf74cf95e9b99e790997b41b8445478d05d4342a0e1e0",
+    "memo": "a4e6ac944c124d0c03939c8c010a2c960202a40f53008e3f13a2ab1c1720678f",
     "projects": [
         {
-            "name": "cloud.google.com/go",
-            "version": "v0.7.0",
-            "revision": "2e6a95edb1071d750f6d7db777bf66cd2997af6c",
+            "name": "github.com/beorn7/perks",
+            "branch": "master",
+            "revision": "4c0e84591b9aa9e6dcfdf3e020114cd81f89d5f9",
             "packages": [
-                "compute/metadata",
-                "internal"
+                "quantile"
+            ]
+        },
+        {
+            "name": "github.com/coreos/etcd",
+            "version": "v3.1.5",
+            "revision": "20490caaf0dcd96bb4a95e40625559def8ef5b04",
+            "packages": [
+                "auth/authpb",
+                "clientv3",
+                "etcdserver/api/v3rpc/rpctypes",
+                "etcdserver/etcdserverpb",
+                "mvcc/mvccpb",
+                "pkg/tlsutil"
+            ]
+        },
+        {
+            "name": "github.com/ghodss/yaml",
+            "version": "v1.0.0",
+            "revision": "0ca9ea5df5451ffdf184b4428c902747c2c11cd7",
+            "packages": [
+                "."
             ]
         },
         {
@@ -23,15 +43,34 @@
             "branch": "master",
             "revision": "2bba0603135d7d7f5cb73b2125beeda19c09f4ef",
             "packages": [
+                "jsonpb",
                 "proto"
             ]
         },
         {
-            "name": "github.com/googleapis/gax-go",
-            "branch": "master",
-            "revision": "9af46dd5a1713e8b5cd71106287eba3cefdde50b",
+            "name": "github.com/grpc-ecosystem/go-grpc-prometheus",
+            "version": "v1.1",
+            "revision": "6b7015e65d366bf3f19b2b2a000a831940f0f7e0",
             "packages": [
                 "."
+            ]
+        },
+        {
+            "name": "github.com/grpc-ecosystem/grpc-gateway",
+            "version": "v1.2.0",
+            "revision": "18d159699f2e83fc5bb9ef2f79465ca3f3122676",
+            "packages": [
+                "runtime",
+                "runtime/internal",
+                "utilities"
+            ]
+        },
+        {
+            "name": "github.com/matttproud/golang_protobuf_extensions",
+            "version": "v1.0.0",
+            "revision": "3247c84500bff8d9fb6d579d800f20b3e091582c",
+            "packages": [
+                "pbutil"
             ]
         },
         {
@@ -40,6 +79,49 @@
             "revision": "dcffd061aaeef4f0ab8369d0443146462b64ea6d",
             "packages": [
                 "."
+            ]
+        },
+        {
+            "name": "github.com/pkg/errors",
+            "version": "v0.8.0",
+            "revision": "645ef00459ed84a119197bfb8d8205042c6df63d",
+            "packages": [
+                "."
+            ]
+        },
+        {
+            "name": "github.com/prometheus/client_golang",
+            "version": "v0.8.0",
+            "revision": "c5b7fccd204277076155f10851dad72b76a49317",
+            "packages": [
+                "prometheus"
+            ]
+        },
+        {
+            "name": "github.com/prometheus/client_model",
+            "branch": "master",
+            "revision": "6f3806018612930941127f2a7c6c453ba2c527d2",
+            "packages": [
+                "go"
+            ]
+        },
+        {
+            "name": "github.com/prometheus/common",
+            "branch": "master",
+            "revision": "49fee292b27bfff7f354ee0f64e1bc4850462edf",
+            "packages": [
+                "expfmt",
+                "internal/bitbucket.org/ww/goautoneg",
+                "model"
+            ]
+        },
+        {
+            "name": "github.com/prometheus/procfs",
+            "branch": "master",
+            "revision": "a1dba9ce8baed984a2495b658c82687f8157b98f",
+            "packages": [
+                ".",
+                "xfs"
             ]
         },
         {
@@ -55,8 +137,7 @@
             "branch": "master",
             "revision": "a111d61d85454f5d58a0f843ced3413b5678f244",
             "packages": [
-                "acme",
-                "providers/dns/googlecloud"
+                "acme"
             ]
         },
         {
@@ -73,7 +154,6 @@
             "revision": "ffcf1bedda3b04ebb15a168a59800a73d6dc0f4d",
             "packages": [
                 "context",
-                "context/ctxhttp",
                 "http2",
                 "http2/hpack",
                 "idna",
@@ -81,18 +161,6 @@
                 "lex/httplex",
                 "publicsuffix",
                 "trace"
-            ]
-        },
-        {
-            "name": "golang.org/x/oauth2",
-            "branch": "master",
-            "revision": "7fdf09982454086d5570c7db3e11f360194830ca",
-            "packages": [
-                ".",
-                "google",
-                "internal",
-                "jws",
-                "jwt"
             ]
         },
         {
@@ -109,34 +177,6 @@
                 "unicode/cldr",
                 "unicode/norm",
                 "unicode/rangetable"
-            ]
-        },
-        {
-            "name": "google.golang.org/api",
-            "branch": "master",
-            "revision": "48e49d1645e228d1c50c3d54fb476b2224477303",
-            "packages": [
-                "dns/v1",
-                "gensupport",
-                "googleapi",
-                "googleapi/internal/uritemplates"
-            ]
-        },
-        {
-            "name": "google.golang.org/appengine",
-            "version": "v1.0.0",
-            "revision": "150dc57a1b433e64154302bdc40b6bb8aefa313a",
-            "packages": [
-                ".",
-                "internal",
-                "internal/app_identity",
-                "internal/base",
-                "internal/datastore",
-                "internal/log",
-                "internal/modules",
-                "internal/remote_api",
-                "internal/urlfetch",
-                "urlfetch"
             ]
         },
         {
@@ -166,6 +206,14 @@
                 ".",
                 "cipher",
                 "json"
+            ]
+        },
+        {
+            "name": "gopkg.in/yaml.v2",
+            "branch": "v2",
+            "revision": "a3f3340b5840cee44f372bddb5880fcbc419b46a",
+            "packages": [
+                "."
             ]
         }
     ]
