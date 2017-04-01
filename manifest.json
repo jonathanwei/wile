@@ -1,0 +1,13 @@
+{
+    "dependencies": {
+        "github.com/golang/glog": {
+            "branch": "master"
+        },
+        "github.com/unrolled/secure": {
+            "branch": "v1"
+        },
+        "github.com/xenolf/lego": {
+            "branch": "master"
+        }
+    }
+}

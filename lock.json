@@ -1,0 +1,124 @@
+{
+    "memo": "29ed37b352c02b8bacc055786609a823f9f1cf61ccc8a65a8e3ff42b41ce9243",
+    "projects": [
+        {
+            "name": "github.com/golang/glog",
+            "branch": "master",
+            "revision": "fca8c8854093a154ff1eb580aae10276ad6b1b5f",
+            "packages": [
+                "."
+            ]
+        },
+        {
+            "name": "github.com/golang/protobuf",
+            "branch": "master",
+            "revision": "2bba0603135d7d7f5cb73b2125beeda19c09f4ef",
+            "packages": [
+                "proto"
+            ]
+        },
+        {
+            "name": "github.com/miekg/dns",
+            "branch": "master",
+            "revision": "89d9c5e74bc17cc9edb5d44d4f2f93a7ac77e365",
+            "packages": [
+                "."
+            ]
+        },
+        {
+            "name": "github.com/unrolled/secure",
+            "branch": "v1",
+            "revision": "4b41e52ab568cbfd31eda3612d98192da1575c77",
+            "packages": [
+                "."
+            ]
+        },
+        {
+            "name": "github.com/xenolf/lego",
+            "branch": "master",
+            "revision": "094e3d41bb0422746c31a8b0b2a2daeeb87408a7",
+            "packages": [
+                "acme",
+                "providers/dns/googlecloud"
+            ]
+        },
+        {
+            "name": "golang.org/x/crypto",
+            "branch": "master",
+            "revision": "1777f3ba8c1fed80fcaec3317e3aaa4f627764d2",
+            "packages": [
+                "ocsp"
+            ]
+        },
+        {
+            "name": "golang.org/x/net",
+            "branch": "master",
+            "revision": "2e9cee70ee697e0a2ef894b560dda50dec7dff58",
+            "packages": [
+                "context",
+                "context/ctxhttp",
+                "idna",
+                "publicsuffix"
+            ]
+        },
+        {
+            "name": "golang.org/x/oauth2",
+            "branch": "master",
+            "revision": "8a57ed94ffd43444c0879fe75701732a38afc985",
+            "packages": [
+                ".",
+                "google",
+                "internal",
+                "jws",
+                "jwt"
+            ]
+        },
+        {
+            "name": "google.golang.org/api",
+            "branch": "master",
+            "revision": "0caa37974a5f5ae67172acf68b4970f7864f994c",
+            "packages": [
+                "dns/v1",
+                "gensupport",
+                "googleapi",
+                "googleapi/internal/uritemplates"
+            ]
+        },
+        {
+            "name": "google.golang.org/appengine",
+            "version": "v1.0.0",
+            "revision": "150dc57a1b433e64154302bdc40b6bb8aefa313a",
+            "packages": [
+                ".",
+                "internal",
+                "internal/app_identity",
+                "internal/base",
+                "internal/datastore",
+                "internal/log",
+                "internal/modules",
+                "internal/remote_api",
+                "internal/urlfetch",
+                "urlfetch"
+            ]
+        },
+        {
+            "name": "google.golang.org/cloud",
+            "branch": "master",
+            "revision": "777d8f0a56610b58d4254b0db6c59d9afd58b5c6",
+            "packages": [
+                "compute/metadata",
+                "internal"
+            ]
+        },
+        {
+            "name": "gopkg.in/square/go-jose.v1",
+            "branch": "master",
+            "revision": "40d457b439244b546f023d056628e5184136899b",
+            "packages": [
+                ".",
+                "cipher",
+                "json"
+            ]
+        }
+    ]
+}
