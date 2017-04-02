@@ -3,13 +3,12 @@ package wile
 import (
 	"path"
 
+	"golang.org/x/crypto/acme/autocert"
 	"golang.org/x/net/context"
 
 	"github.com/coreos/etcd/clientv3"
 	"github.com/pkg/errors"
 )
-
-const etcdPrefix = "/wile/acme/http"
 
 type EtcdCache struct {
 	etcd       *clientv3.Client
@@ -24,6 +23,9 @@ func (e *EtcdCache) Get(ctx context.Context, key string) ([]byte, error) {
 	gr, err := e.etcd.Get(ctx, key)
 	if err != nil {
 		return nil, err
+	}
+	if len(gr.Kvs) == 0 {
+		return nil, autocert.ErrCacheMiss
 	}
 	return gr.Kvs[0].Value, nil
 }
