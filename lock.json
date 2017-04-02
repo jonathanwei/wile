@@ -1,5 +1,5 @@
 {
-    "memo": "a4e6ac944c124d0c03939c8c010a2c960202a40f53008e3f13a2ab1c1720678f",
+    "memo": "30a32b745d8c1860fda14b9a9d2ec31e8e6eae9e5b838cee58c6ae60139aa8fe",
     "projects": [
         {
             "name": "github.com/beorn7/perks",
@@ -33,7 +33,7 @@
         {
             "name": "github.com/golang/glog",
             "branch": "master",
-            "revision": "23def4e6c14b4da8ac2ed8007337bc5eb5007998",
+            "revision": "fca8c8854093a154ff1eb580aae10276ad6b1b5f",
             "packages": [
                 "."
             ]
@@ -71,14 +71,6 @@
             "revision": "3247c84500bff8d9fb6d579d800f20b3e091582c",
             "packages": [
                 "pbutil"
-            ]
-        },
-        {
-            "name": "github.com/miekg/dns",
-            "branch": "master",
-            "revision": "dcffd061aaeef4f0ab8369d0443146462b64ea6d",
-            "packages": [
-                "."
             ]
         },
         {
@@ -126,18 +118,10 @@
         },
         {
             "name": "github.com/unrolled/secure",
-            "branch": "master",
-            "revision": "824e85271811af89640ea25620c67f6c2eed987e",
+            "branch": "v1",
+            "revision": "4b41e52ab568cbfd31eda3612d98192da1575c77",
             "packages": [
                 "."
-            ]
-        },
-        {
-            "name": "github.com/xenolf/lego",
-            "branch": "master",
-            "revision": "a111d61d85454f5d58a0f843ced3413b5678f244",
-            "packages": [
-                "acme"
             ]
         },
         {
@@ -145,7 +129,9 @@
             "branch": "master",
             "revision": "3cb07270c9455e8ad27956a70891c962d121a228",
             "packages": [
-                "ocsp"
+                "acme",
+                "acme/autocert",
+                "hkdf"
             ]
         },
         {
@@ -154,12 +140,12 @@
             "revision": "ffcf1bedda3b04ebb15a168a59800a73d6dc0f4d",
             "packages": [
                 "context",
+                "context/ctxhttp",
                 "http2",
                 "http2/hpack",
                 "idna",
                 "internal/timeseries",
                 "lex/httplex",
-                "publicsuffix",
                 "trace"
             ]
         },
@@ -196,16 +182,6 @@
                 "stats",
                 "tap",
                 "transport"
-            ]
-        },
-        {
-            "name": "gopkg.in/square/go-jose.v1",
-            "version": "v1.1.0",
-            "revision": "aa2e30fdd1fe9dd3394119af66451ae790d50e0d",
-            "packages": [
-                ".",
-                "cipher",
-                "json"
             ]
         },
         {

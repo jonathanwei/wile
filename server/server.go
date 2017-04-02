@@ -7,18 +7,13 @@ import (
 	"net/url"
 
 	"github.com/golang/glog"
-	"github.com/jonathanwei/wile"
 	"github.com/unrolled/secure"
+	"golang.org/x/crypto/acme/autocert"
 )
 
-func run(backends map[string]*url.URL, hosts map[string]string, isDev bool, wileCfg *wile.Config) {
-	wileClient, err := wile.NewClient(wileCfg)
-	if err != nil {
-		glog.Fatalf("Got error creating wile client: %v", err)
-	}
-
-	go httpServer(isDev, wileClient)
-	httpsServer(backends, hosts, isDev, wileClient)
+func run(backends map[string]*url.URL, hosts map[string]string, isDev bool, certMgr *autocert.Manager) {
+	go httpServer(isDev)
+	httpsServer(backends, hosts, isDev, certMgr)
 }
 
 type proxy struct {
@@ -49,20 +44,20 @@ func (p *proxy) ServeHTTP(rw http.ResponseWriter, req *http.Request) {
 	h.ServeHTTP(rw, req)
 }
 
-func httpsServer(backends map[string]*url.URL, hosts map[string]string, isDev bool, wileClient *wile.Client) {
+func httpsServer(backends map[string]*url.URL, hosts map[string]string, isDev bool, certMgr *autocert.Manager) {
 	handler := newProxy(backends, hosts)
 	server := &http.Server{
 		Addr:    ":443",
 		Handler: securify(isDev, handler),
 		TLSConfig: &tls.Config{
-			GetCertificate: wileClient.GetCertificate,
+			GetCertificate: certMgr.GetCertificate,
 			MinVersion:     tls.VersionTLS12,
 		},
 	}
 	glog.Fatal(server.ListenAndServeTLS("", ""))
 }
 
-func httpServer(isDev bool, wileClient *wile.Client) {
+func httpServer(isDev bool) {
 	redirectHandler := http.HandlerFunc(func(rw http.ResponseWriter, req *http.Request) {
 		u := &url.URL{
 			Scheme:   "https",
@@ -74,7 +69,6 @@ func httpServer(isDev bool, wileClient *wile.Client) {
 	})
 
 	mux := http.NewServeMux()
-	mux.Handle("/.well-known/acme-challenge/", wileClient)
 	mux.Handle("/", securify(isDev, redirectHandler))
 
 	glog.Fatal(http.ListenAndServe(":80", mux))

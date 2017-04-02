@@ -5,10 +5,13 @@ import (
 	"fmt"
 	"log"
 	"net/url"
-	"os"
 	"strings"
+	"time"
 
+	"github.com/coreos/etcd/clientv3"
 	"github.com/jonathanwei/wile"
+	"golang.org/x/crypto/acme"
+	"golang.org/x/crypto/acme/autocert"
 )
 
 func main() {
@@ -18,10 +21,14 @@ func main() {
 		development  = flag.Bool("insecure_development_mode", false, "True iff the server should run in an insecure development mode.")
 		acmeEndpoint = flag.String("acme", "https://acme-staging.api.letsencrypt.org/directory", "The ACME server to sign certs.")
 		acmeEmail    = flag.String("email", "", "The email to use when registering with acme.")
-		certPath     = flag.String("cert_path", "$HOME/.config/wile/wile.json", "The path to cache certs.")
+		certKey      = flag.String("cert_key", "", "The key to encrypt certificates in etcd.")
 	)
 
 	flag.Parse()
+
+	if *certKey == "" {
+		log.Fatal("Must provide -cert_key")
+	}
 
 	backends := parseBackendSpecs(*backendsFlag)
 	hosts := parseHostSpecs(*hostsFlag, backends)
@@ -31,15 +38,29 @@ func main() {
 		domains = append(domains, h)
 	}
 
-	wileCfg := &wile.Config{
-		APIEndpoint:    *acmeEndpoint,
-		Email:          *acmeEmail,
-		Path:           os.ExpandEnv(*certPath),
-		InitialDomains: domains,
-		EtcdEndpoints:  []string{"localhost:2378"},
+	etcd, err := clientv3.New(clientv3.Config{
+		Endpoints:   []string{"localhost:2378"},
+		DialTimeout: 5 * time.Second,
+	})
+	if err != nil {
+		log.Fatalf("Failed to connect to etcd: %v", err)
 	}
 
-	run(backends, hosts, *development, wileCfg)
+	cache, err := wile.NewEncryptingCache(wile.NewEtcdCache(etcd, "/wile/acme/http"), []byte(*certKey))
+	if err != nil {
+		log.Fatalf("Failed to create cache: %v", err)
+	}
+
+	m := autocert.Manager{
+		Prompt:      autocert.AcceptTOS,
+		Cache:       cache,
+		HostPolicy:  autocert.HostWhitelist(domains...),
+		RenewBefore: 30 * 24 * time.Hour,
+		Client:      &acme.Client{DirectoryURL: *acmeEndpoint},
+		Email:       *acmeEmail,
+	}
+
+	run(backends, hosts, *development, &m)
 }
 
 func parseBackendSpecs(specs string) map[string]*url.URL {

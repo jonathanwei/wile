@@ -6,7 +6,10 @@
         "github.com/unrolled/secure": {
             "branch": "v1"
         },
-        "github.com/xenolf/lego": {
+        "golang.org/x/crypto": {
+            "branch": "master"
+        },
+        "golang.org/x/net": {
             "branch": "master"
         }
     }
