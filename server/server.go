@@ -82,7 +82,7 @@ func securify(isDev bool, handler http.Handler) http.Handler {
 		FrameDeny:             true,
 		ContentTypeNosniff:    true,
 		BrowserXssFilter:      true,
-		ContentSecurityPolicy: "default-src 'self'; object-src 'none'",
+		ContentSecurityPolicy: "object-src 'none'; script-src $NONCE 'unsafe-inline' 'strict-dynamic' https:; base-uri 'none';",
 		IsDevelopment:         isDev,
 	})
 	return secureMiddleware.Handler(handler)
