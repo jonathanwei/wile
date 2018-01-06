@@ -118,8 +118,8 @@
         },
         {
             "name": "github.com/unrolled/secure",
-            "branch": "v1",
-            "revision": "4b41e52ab568cbfd31eda3612d98192da1575c77",
+            "branch": "master",
+            "revision": "d6ff8660e1a61e887970a917ee2b9be0cfad6d40",
             "packages": [
                 "."
             ]
