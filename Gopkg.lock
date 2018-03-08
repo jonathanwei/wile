@@ -8,10 +8,21 @@
     "clientv3",
     "etcdserver/api/v3rpc/rpctypes",
     "etcdserver/etcdserverpb",
-    "mvcc/mvccpb"
+    "mvcc/mvccpb",
+    "pkg/types"
   ]
-  revision = "95a726a27e09030f9ccbd9982a1508f5a6d25ada"
-  version = "v3.2.13"
+  revision = "28f3f26c0e303392556035b694f75768d449d33d"
+  version = "v3.3.1"
+
+[[projects]]
+  name = "github.com/gogo/protobuf"
+  packages = [
+    "gogoproto",
+    "proto",
+    "protoc-gen-gogo/descriptor"
+  ]
+  revision = "1adfc126b41513cc696b209667c8656ea7aac67c"
+  version = "v1.0.0"
 
 [[projects]]
   branch = "master"
@@ -20,17 +31,16 @@
   revision = "23def4e6c14b4da8ac2ed8007337bc5eb5007998"
 
 [[projects]]
-  branch = "master"
   name = "github.com/golang/protobuf"
   packages = [
     "proto",
-    "protoc-gen-go/descriptor",
     "ptypes",
     "ptypes/any",
     "ptypes/duration",
     "ptypes/timestamp"
   ]
-  revision = "1e59b77b52bf8e4b449a57e6f79f21226d571845"
+  revision = "925541529c1fa6821df4e44ce2723319eb2be768"
+  version = "v1.0.0"
 
 [[projects]]
   name = "github.com/pkg/errors"
@@ -42,7 +52,7 @@
   branch = "master"
   name = "github.com/unrolled/secure"
   packages = ["."]
-  revision = "d6ff8660e1a61e887970a917ee2b9be0cfad6d40"
+  revision = "88720c9cbecfcf2eceb9bb4311ad6e398a8381ed"
 
 [[projects]]
   branch = "master"
@@ -52,7 +62,7 @@
     "acme/autocert",
     "hkdf"
   ]
-  revision = "0fcca4842a8d74bfddc2c96a073bd2a4d2a7a2e8"
+  revision = "85f98707c97e11569271e4d9b3d397e079c4f4d0"
 
 [[projects]]
   branch = "master"
@@ -66,10 +76,9 @@
     "lex/httplex",
     "trace"
   ]
-  revision = "42fe2e1c20de1054d3d30f82cc9fb5b41e2e3767"
+  revision = "07e8617a6db2368fa55d4616f371ee1b1403c817"
 
 [[projects]]
-  branch = "master"
   name = "golang.org/x/text"
   packages = [
     "collate",
@@ -87,16 +96,14 @@
     "unicode/norm",
     "unicode/rangetable"
   ]
-  revision = "e19ae1496984b1c655b8044a65c0300a3c878dd3"
+  revision = "f21a4dfb5e38f5895301dc265a8def02365cc3d0"
+  version = "v0.3.0"
 
 [[projects]]
   branch = "master"
   name = "google.golang.org/genproto"
-  packages = [
-    "googleapis/api/annotations",
-    "googleapis/rpc/status"
-  ]
-  revision = "a8101f21cf983e773d0c1133ebc5424792003214"
+  packages = ["googleapis/rpc/status"]
+  revision = "df60624c1e9b9d2973e889c7a1cff73155da81c4"
 
 [[projects]]
   name = "google.golang.org/grpc"
@@ -109,6 +116,7 @@
     "connectivity",
     "credentials",
     "encoding",
+    "encoding/proto",
     "grpclb/grpc_lb_v1/messages",
     "grpclog",
     "health/grpc_health_v1",
@@ -125,8 +133,8 @@
     "tap",
     "transport"
   ]
-  revision = "f3955b8e9e244dd4dd4bc4f7b7a23a8445400a76"
-  version = "v1.9.0"
+  revision = "8e4536a86ab602859c20df5ebfd0bd4228d08655"
+  version = "v1.10.0"
 
 [solve-meta]
   analyzer-name = "dep"

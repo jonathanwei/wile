@@ -12,7 +12,7 @@ import (
 )
 
 func run(backends map[string]*url.URL, hosts map[string]string, isDev bool, certMgr *autocert.Manager) {
-	go httpServer(isDev)
+	go httpServer(isDev, certMgr)
 	httpsServer(backends, hosts, isDev, certMgr)
 }
 
@@ -57,7 +57,7 @@ func httpsServer(backends map[string]*url.URL, hosts map[string]string, isDev bo
 	glog.Fatal(server.ListenAndServeTLS("", ""))
 }
 
-func httpServer(isDev bool) {
+func httpServer(isDev bool, certMgr *autocert.Manager) {
 	redirectHandler := http.HandlerFunc(func(rw http.ResponseWriter, req *http.Request) {
 		u := &url.URL{
 			Scheme:   "https",
@@ -71,7 +71,7 @@ func httpServer(isDev bool) {
 	mux := http.NewServeMux()
 	mux.Handle("/", securify(isDev, redirectHandler))
 
-	glog.Fatal(http.ListenAndServe(":80", mux))
+	glog.Fatal(http.ListenAndServe(":80", certMgr.HTTPHandler(mux)))
 }
 
 func securify(isDev bool, handler http.Handler) http.Handler {
