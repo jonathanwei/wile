@@ -51,7 +51,7 @@ func httpsServer(backends map[string]*url.URL, hosts map[string]string, isDev bo
 		Handler: securify(isDev, handler),
 		TLSConfig: &tls.Config{
 			GetCertificate: certMgr.GetCertificate,
-			MinVersion:     tls.VersionTLS12,
+			MinVersion:     tls.VersionTLS13,
 		},
 	}
 	glog.Fatal(server.ListenAndServeTLS("", ""))
